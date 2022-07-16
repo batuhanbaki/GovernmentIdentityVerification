@@ -3,7 +3,7 @@ plugins {
 }
 apply plugin: 'maven-publish' // Apply this plugin at the top of your library build.gradle
 def githubProperties = new Properties()
-githubProperties.load(new FileInputStream(rootProject.file("githubs.properties")))
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 def getArtificatId = { ->
     return "identitycheck"
 }
@@ -16,7 +16,7 @@ android {
         minSdk 21
         targetSdk 32
         versionCode 1
-        versionName "1.0.2"
+        versionName "1.0.3"
         buildConfigField 'String', 'buildTime', "\"${buildTime}\""
         buildConfigField 'String', 'SOAP_ACTION', "\"http://tckimlik.nvi.gov.tr/WS/TCKimlikNoDogrula\""
         buildConfigField 'String', 'METHOD_NAME', "\"TCKimlikNoDogrula\""
@@ -55,7 +55,7 @@ dependencies {
 }
 
 def getVersionName = { ->
-    return "1.0.2"
+    return "1.0.3"
 }
 publishing {
     publications {

@@ -3,7 +3,7 @@ plugins {
 }
 apply plugin: 'maven-publish' // Apply this plugin at the top of your library build.gradle
 def githubProperties = new Properties()
-githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
+githubProperties.load(new FileInputStream(rootProject.file("githubs.properties")))
 def getArtificatId = { ->
     return "identitycheck"
 }

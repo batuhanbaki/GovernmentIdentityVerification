@@ -60,11 +60,9 @@ dependencies {
 publishing {
     publications {
         bar(MavenPublication) {
-            groupId 'com.batuhanbaki' // Replace with group ID
             groupId 'com.batuhanbaki'
             artifactId getArtificatId()
             version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
             artifact("$buildDir/outputs/aar/${getArtificatId()}.aar")
         }
     }
@@ -72,14 +70,10 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            /** Configure path of your package repository on Github
-             ** Replace GITHUB_USERID with your/organisation Github userID
-             ** and REPOSITORY with the repository name on GitHub
-             */
             url = uri("https://maven.pkg.github.com/batuhanbaki/identitycheck")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                password = githubProperties['gpr.key'] ?: System.getenv("GPR_USER")
             }
         }
     }

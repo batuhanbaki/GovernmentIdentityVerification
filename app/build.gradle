@@ -1,7 +1,8 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
 }
-apply plugin: 'maven-publish'
+
 def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 def getArtificatId = { ->

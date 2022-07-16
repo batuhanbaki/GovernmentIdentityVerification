@@ -2,14 +2,15 @@ plugins {
     id 'com.android.library'
     id 'maven-publish'
 }
-
+def githubProperties = new Properties()
 def getArtificatId = { ->
     return "identitycheck"
 }
 def buildTime = new Date().format("yyMMddHHmm", TimeZone.getTimeZone("Asia/Istanbul"))
 def getVersionName = { ->
-    return "1.0.0"
+    return "1.0.4"
 }
+githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 
 android {
     compileSdk 32
@@ -55,3 +56,31 @@ dependencies {
     implementation files('libs/soap.jar')
 }
 
+
+publishing {
+    publications {
+        bar(MavenPublication) {
+            groupId 'com.batuhanbaki' // Replace with group ID
+            groupId 'com.batuhanbaki'
+            artifactId getArtificatId()
+            version getVersionName()
+            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
+            artifact("$buildDir/outputs/aar/${getArtificatId()}.aar")
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            /** Configure path of your package repository on Github
+             ** Replace GITHUB_USERID with your/organisation Github userID
+             ** and REPOSITORY with the repository name on GitHub
+             */
+            url = uri("https://maven.pkg.github.com/batuhanbaki/identitycheck")
+            credentials {
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
+            }
+        }
+    }
+}

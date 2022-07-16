@@ -1,13 +1,16 @@
 plugins {
     id 'com.android.library'
 }
-apply plugin: 'maven-publish' // Apply this plugin at the top of your library build.gradle
+apply plugin: 'maven-publish'
 def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 def getArtificatId = { ->
     return "identitycheck"
 }
 def buildTime = new Date().format("yyMMddHHmm", TimeZone.getTimeZone("Asia/Istanbul"))
+def getVersionName = { ->
+    return "1.0.0"
+}
 
 android {
     compileSdk 32
@@ -16,7 +19,7 @@ android {
         minSdk 21
         targetSdk 32
         versionCode 1
-        versionName "1.0.3"
+        versionName "${getVersionName()}"
         buildConfigField 'String', 'buildTime', "\"${buildTime}\""
         buildConfigField 'String', 'SOAP_ACTION', "\"http://tckimlik.nvi.gov.tr/WS/TCKimlikNoDogrula\""
         buildConfigField 'String', 'METHOD_NAME', "\"TCKimlikNoDogrula\""
@@ -34,7 +37,7 @@ android {
 
     libraryVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "${getArtificatId()}-release.aar"
+            outputFileName = "${getArtificatId()}.aar"
 
         }
     }
@@ -54,26 +57,20 @@ dependencies {
     implementation files('libs/soap.jar')
 }
 
-def getVersionName = { ->
-    return "1.0.3"
-}
+
 publishing {
     publications {
         bar(MavenPublication) {
-            groupId 'com.batuhanbaki' // Replace with group ID
+            groupId 'com.batuhanbaki'
             artifactId getArtificatId()
             version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
+            artifact("$buildDir/outputs/aar/${getArtificatId()}.aar")
         }
     }
 
     repositories {
         maven {
             name = "GitHubPackages"
-            /** Configure path of your package repository on Github
-             ** Replace GITHUB_USERID with your/organisation Github userID
-             ** and REPOSITORY with the repository name on GitHub
-             */
             url = uri("https://maven.pkg.github.com/batuhanbaki/identitycheck")
             credentials {
                 username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")

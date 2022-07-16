@@ -1,6 +1,6 @@
 # Identity Check Library
 
-This library uses https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx?op=TCKimlikNoDogrula source. NVI is goverment departmant and if you want use custom checker follow the link.
+
 
 # How To Use
 
@@ -50,4 +50,4 @@ implementation 'com.github.batuhanbaki:identitycheck:{RELEASE-VERSION}'
 ```
 
 ### NOTE : Just Turkish Identity Verification For Now!
-
+### NOTE : Uses https://tckimlik.nvi.gov.tr/Service/KPSPublic.asmx?op=TCKimlikNoDogrula source. NVI is goverment departmant and if you want use custom checker follow the link.

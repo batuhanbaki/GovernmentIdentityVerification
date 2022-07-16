@@ -49,5 +49,5 @@ implementation 'com.github.batuhanbaki:identitycheck:{RELEASE-VERSION}'
         thread.start();
 ```
 
-### NOTE : Just for Turkish Identity Verification For Now!
+### NOTE : Just Turkish Identity Verification For Now!
 

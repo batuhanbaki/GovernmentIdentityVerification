@@ -17,7 +17,7 @@ allprojects {
 ```
 
 ```
-implementation 'com.github.batuhanbaki:identitycheck:1.0.2'
+implementation 'com.github.batuhanbaki:identitycheck:{RELEASE-VERSION}'
 ```
 
 ### Using

@@ -3,8 +3,6 @@ plugins {
     id 'maven-publish'
 }
 
-def githubProperties = new Properties()
-githubProperties.load(new FileInputStream(rootProject.file("github.properties")))
 def getArtificatId = { ->
     return "identitycheck"
 }
@@ -15,7 +13,6 @@ def getVersionName = { ->
 
 android {
     compileSdk 32
-
     defaultConfig {
         minSdk 21
         targetSdk 32
@@ -58,25 +55,3 @@ dependencies {
     implementation files('libs/soap.jar')
 }
 
-
-publishing {
-    publications {
-        bar(MavenPublication) {
-            groupId 'com.batuhanbaki'
-            artifactId getArtificatId()
-            version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtificatId()}.aar")
-        }
-    }
-
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/batuhanbaki/identitycheck")
-            credentials {
-                username = githubProperties['gpr.usr'] ?: System.getenv("GPR_USER")
-                password = githubProperties['gpr.key'] ?: System.getenv("GPR_API_KEY")
-            }
-        }
-    }
-}

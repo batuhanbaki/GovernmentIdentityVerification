@@ -27,9 +27,9 @@ implementation 'com.github.batuhanbaki:identitycheck:{RELEASE-VERSION}'
         {
             UserModel model = new UserModel.Builder()
                     .identityNumber(12345678910L) //Length: 11
-                    .name("batuhan")
-                    .surname("surname")
-                    .birthYear(2000)
+                    .name("Batuhan")
+                    .surname("Baki")
+                    .birthYear(1999)
                     .build();
             try {
                 ISOAPActions actions = IdentityChecker.getInstance(IdentityEnum.TURKISH, model)
